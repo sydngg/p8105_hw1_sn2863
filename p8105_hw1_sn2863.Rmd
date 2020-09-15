@@ -1,7 +1,7 @@
 ---
 title: "Homework 1 - Building Blocks"
 author: "Sydney Ng"
-date: "9/14/2020"
+date: "due 9/19/2020 by 10:00 pm EDT"
 output: html_document
 ---
 
@@ -17,7 +17,7 @@ Create a data frame composed of
 ```{r, message=FALSE}
 library(tidyverse)
 
-set.seed(123) # for reproducibility
+set.seed(123) # setting seed for reproducibility
 
 my_df <- tibble(
   vec_numeric <- rnorm(10),
@@ -36,14 +36,14 @@ my_df
 
 When I try to take the mean of each variable in my data frame, it works for both the numeric and logical vectors but does not work for the character and factor vectors.
 
-In a second code chunk
+#### In a second code chunk...
 
 * convert the logical vector to numeric, and multiply the random sample by the result
 * convert the logical vector to a factor, and multiple the random sample by the result
 * convert the logical vector to a factor and then convert the result to numeric, and multiply the random sample by the result
 
 ```{r}
-vec_logical_num <- as.numeric(my_df$`vec_logical <- ifelse(rand_sample > 0, TRUE, FALSE)`)
+vec_logical_num <- as.numeric(my_df$vec_numeric)
 ```
 
 ## Problem 2
@@ -67,7 +67,9 @@ Write a short description of the `penguins` dataset using inline R code.
 * The mean flipper length is `r mean(penguins$flipper_length_mm, na.rm = TRUE)` mm.
 
 #### Scatterplot of flipper length (mm) and bill length (mm)
-```{r}
-
+```{r, warning = FALSE}
+ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, 
+                     color = species)) + geom_point()
+ggsave("first_scatterplot.pdf", height = 4, width = 6)
 ```
 
