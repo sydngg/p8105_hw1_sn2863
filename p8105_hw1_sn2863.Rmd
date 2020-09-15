@@ -1,9 +1,13 @@
 ---
 title: "Homework 1 - Building Blocks"
-author: "Sydney Ng"
+author: "Sydney Ng (uni: sn2863)"
 date: "due 9/19/2020 by 10:00 pm EDT"
-output: html_document
+output: github_document
 ---
+
+```{r}
+library(tidyverse)
+```
 
 ## Problem 1
 
@@ -15,23 +19,22 @@ Create a data frame composed of
 * a factor of length 10, with 3 different factor "levels"
 
 ```{r, message=FALSE}
-library(tidyverse)
-
 set.seed(123) # setting seed for reproducibility
 
 my_df <- tibble(
-  vec_numeric <- rnorm(10),
-  vec_logical <- ifelse(vec_numeric > 0, TRUE, FALSE),
-  vec_char <- c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J"),
-  vec_factors <- factor(c("yellow", "blue", "red", "yellow", "blue", 
+  vec_numeric = rnorm(10),
+  vec_logical = ifelse(vec_numeric > 0, TRUE, FALSE),
+  vec_char = c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J"),
+  vec_factors = factor(c("yellow", "blue", "red", "yellow", "blue", 
                           "red", "yellow", "blue", "red", "yellow"))
 )
 
 my_df
 
-#mean(my_df$`vec_numeric <- rnorm(10)`)
-#mean(my_df$`vec_logical <- ifelse(rand_sample > 0, TRUE, FALSE)`)
-#mean(my_df$`vec_char <- c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J")`)
+mean(pull(my_df, vec_numeric))
+mean(pull(my_df, vec_logical))
+mean(pull(my_df, vec_char))
+mean(pull(my_df, vec_factors))
 ```
 
 When I try to take the mean of each variable in my data frame, it works for both the numeric and logical vectors but does not work for the character and factor vectors.
@@ -43,7 +46,15 @@ When I try to take the mean of each variable in my data frame, it works for both
 * convert the logical vector to a factor and then convert the result to numeric, and multiply the random sample by the result
 
 ```{r}
-vec_logical_num <- as.numeric(my_df$vec_numeric)
+vec_logical_num <- as.numeric(pull(my_df, vec_logical))
+my_df$vec_numeric*vec_logical_num
+
+vec_logical_factor <- as.factor(pull(my_df, vec_logical))
+my_df$vec_numeric*vec_logical_factor
+
+vec_logical_factor_num <- as.factor(pull(my_df, vec_logical)) %>%
+  as.numeric()
+my_df$vec_numeric*vec_logical_factor_num
 ```
 
 ## Problem 2
