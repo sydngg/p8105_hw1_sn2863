@@ -1,0 +1,73 @@
+---
+title: "Homework 1 - Building Blocks"
+author: "Sydney Ng"
+date: "9/14/2020"
+output: html_document
+---
+
+## Problem 1
+
+Create a data frame composed of
+
+* a random sample of size 10 from a normal distribution
+* a logical vector indicating whether elements of the sample are greater than 0
+* a character vector of length 10
+* a factor of length 10, with 3 different factor "levels"
+
+```{r, message=FALSE}
+library(tidyverse)
+
+set.seed(123) # for reproducibility
+
+my_df <- tibble(
+  vec_numeric <- rnorm(10),
+  vec_logical <- ifelse(vec_numeric > 0, TRUE, FALSE),
+  vec_char <- c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J"),
+  vec_factors <- factor(c("yellow", "blue", "red", "yellow", "blue", 
+                          "red", "yellow", "blue", "red", "yellow"))
+)
+
+my_df
+
+#mean(my_df$`vec_numeric <- rnorm(10)`)
+#mean(my_df$`vec_logical <- ifelse(rand_sample > 0, TRUE, FALSE)`)
+#mean(my_df$`vec_char <- c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J")`)
+```
+
+When I try to take the mean of each variable in my data frame, it works for both the numeric and logical vectors but does not work for the character and factor vectors.
+
+In a second code chunk
+
+* convert the logical vector to numeric, and multiply the random sample by the result
+* convert the logical vector to a factor, and multiple the random sample by the result
+* convert the logical vector to a factor and then convert the result to numeric, and multiply the random sample by the result
+
+```{r}
+vec_logical_num <- as.numeric(my_df$`vec_logical <- ifelse(rand_sample > 0, TRUE, FALSE)`)
+```
+
+## Problem 2
+
+```{r}
+data("penguins", package = "palmerpenguins")
+```
+
+Write a short description of the `penguins` dataset using inline R code.
+
+* Variables in the `penguins` dataset:
+  * `species`: factor with 3 levels "Adelie", "Chinstrap", and "Gentoo"
+  * `island`: factor with 3 levels "Biscoe", "Dream", and "Torgersen"
+  * `bill_length_mm`: numeric
+  * `bill_depth_mm`: numeric
+  * `flipper_length_mm`: numeric
+  * `body_mass_g`: numeric
+  * `sex`: factor with 2 levels "female" and "male"
+  * `year`: numeric, ranging from 2007 to 2009
+* There are `r nrow(penguins)` total observations and `r ncol(penguins)` columns.
+* The mean flipper length is `r mean(penguins$flipper_length_mm, na.rm = TRUE)` mm.
+
+#### Scatterplot of flipper length (mm) and bill length (mm)
+```{r}
+
+```
+
