@@ -68,11 +68,10 @@ Write a short description of the `penguins` dataset using inline R code.
 * Variables in the `penguins` dataset:
   * `species`: factor with 3 levels "Adelie", "Chinstrap", and "Gentoo"
   * `island`: factor with 3 levels "Biscoe", "Dream", and "Torgersen"
-  * `bill_length_mm`: numeric
-  * `bill_depth_mm`: numeric
-  * `flipper_length_mm`: numeric
-  * `body_mass_g`: numeric
-  * `sex`: factor with 2 levels "female" and "male"
+  * `bill_length_mm`: numeric with mean = `r mean(pull(penguins, bill_length_mm), , na.rm = TRUE)` mm
+  * `bill_depth_mm`: numeric with mean = `r mean(pull(penguins, bill_depth_mm), na.rm = TRUE)` mm
+  * `flipper_length_mm`: numeric with mean = `r mean(pull(penguins, flipper_length_mm), na.rm = TRUE)` mm
+  * `body_mass_g`: numeric with mean = `r mean(pull(penguins, body_mass_g), na.rm = TRUE)` g
   * `year`: numeric, ranging from 2007 to 2009
 * There are `r nrow(penguins)` total observations and `r ncol(penguins)` columns.
 * The mean flipper length is `r mean(penguins$flipper_length_mm, na.rm = TRUE)` mm.
